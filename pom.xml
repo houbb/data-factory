@@ -32,11 +32,12 @@
         <project.compiler.level>1.8</project.compiler.level>
 
         <!--============================== INTER ==============================-->
-        <log-integration.version>1.1.3</log-integration.version>
+        <heaven.version>0.0.2</heaven.version>
 
         <!--============================== OTHER ==============================-->
-        <junit.version>5.2.0</junit.version>
+        <junit5.version>5.2.0</junit5.version>
         <apiguardian-api.version>1.0.0</apiguardian-api.version>
+        <auto-service.version>1.0-rc4</auto-service.version>
     </properties>
 
 
@@ -45,11 +46,23 @@
 
         <dependencies>
 
+            <!--============================== SELF ==============================-->
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>data-factory-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>data-factory-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!--============================== INTER ==============================-->
             <dependency>
                 <groupId>com.github.houbb</groupId>
-                <artifactId>log-integration</artifactId>
-                <version>${log-integration.version}</version>
+                <artifactId>heaven</artifactId>
+                <version>${heaven.version}</version>
             </dependency>
 
 
@@ -57,7 +70,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.2.0</version>
+                <version>${junit5.version}</version>
                 <scope>test</scope>
                 <optional>true</optional>
             </dependency>
@@ -67,6 +80,12 @@
                 <artifactId>apiguardian-api</artifactId>
                 <version>${apiguardian-api.version}</version>
                 <optional>true</optional>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.auto.service</groupId>
+                <artifactId>auto-service</artifactId>
+                <version>${auto-service.version}</version>
             </dependency>
 
         </dependencies>
