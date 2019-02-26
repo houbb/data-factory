@@ -5,6 +5,7 @@ import com.github.houbb.data.factory.api.core.IData;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * BigInteger 的实现处理
@@ -15,6 +16,7 @@ import java.math.BigInteger;
 public class BigDecimalData implements IData<BigDecimal> {
     @Override
     public BigDecimal build(IContext context, Class<BigDecimal> bigIntegerClass) {
-        return null;
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        return new BigDecimal(random.nextLong());
     }
 }

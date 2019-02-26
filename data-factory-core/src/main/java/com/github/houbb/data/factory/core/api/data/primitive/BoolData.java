@@ -16,16 +16,10 @@ import java.util.concurrent.ThreadLocalRandom;
 @AutoService(IData.class)
 public class BoolData implements IData<Boolean> {
 
-    /**
-     * 是否
-     */
-    private static final boolean[] BOOLEANS = new boolean[]{true, false};
-
     @Override
     public Boolean build(IContext context, Class<Boolean> booleanClass) {
         ThreadLocalRandom random =  ThreadLocalRandom.current();
-        final int randomIndex = random.nextInt(BOOLEANS.length);
-        return BOOLEANS[randomIndex];
+        return random.nextBoolean();
     }
 
 }

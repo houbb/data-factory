@@ -55,6 +55,9 @@ public final class DataFactory {
             return NULL_DATA;
         }
 
+        // 数组/map/集合/bean对象
+
+
         // 其他已有类型的处理
         Class realClazz = DataPrimitiveUtil.getReferenceType(clazz);
         final Class<? extends IData> dataClass = DATA_CLASS_MAP.get(realClazz);

@@ -4,8 +4,6 @@ import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.support.factory.DataFactory;
 
-import java.lang.reflect.Array;
-
 /**
  * 数据的默认实现类
  * @author binbin.hou
@@ -26,8 +24,4 @@ public class Data<T> implements IData<T> {
         return (T) data.build(context, tClass);
     }
 
-//    public static void main(String[] args) {
-//        String[] strings = new String[]{"a"};
-//        System.out.println(strings.getClass().);
-//    }
 }

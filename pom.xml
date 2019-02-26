@@ -9,7 +9,6 @@
     <modules>
         <module>data-factory-api</module>
         <module>data-factory-core</module>
-        <module>data-factory-test</module>
     </modules>
 
     <properties>

@@ -1,7 +1,9 @@
 package com.github.houbb.data.factory.core.util;
 
+import com.github.houbb.data.factory.core.core.Data;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,8 +44,26 @@ public class DataClassUtil {
         return typeList;
     }
 
-    public static void main(String[] args) {
-        System.out.println(Arrays.asList(null));
+    /**
+     * 获取泛型类型
+     * @param clazz 数据类型
+     * @param interfaceClass 接口对应的 class 信息
+     * @param index 泛型的下标志位置
+     * @return 对应的泛型类型
+     */
+    public static Class getGenericType(final Class clazz,
+                                        final Class interfaceClass,
+                                        final int index) {
+        List<Type> typeList = DataClassUtil.getAllGenericInterfaces(clazz);
+        for(Type type : typeList) {
+            if(type instanceof ParameterizedType
+                    && interfaceClass.equals(((ParameterizedType) type).getRawType())) {
+                ParameterizedType p = (ParameterizedType)type;
+                return (Class) p.getActualTypeArguments()[index];
+            }
+        }
+
+        return Data.class;
     }
 
 }
