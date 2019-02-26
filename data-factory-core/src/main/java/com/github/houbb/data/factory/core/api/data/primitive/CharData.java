@@ -1,7 +1,11 @@
 package com.github.houbb.data.factory.core.api.data.primitive;
 
+import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.google.auto.service.AutoService;
+
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author binbin.hou
@@ -11,9 +15,16 @@ import com.google.auto.service.AutoService;
 @AutoService(IData.class)
 public class CharData implements IData<Character> {
 
+    /**
+     * 限制
+     */
+    private static final int LIMIT = 65535;
+
     @Override
-    public Character build(Class<Character> booleanClass) {
-        return null;
+    public Character build(IContext context, Class<Character> booleanClass) {
+        ThreadLocalRandom random =  ThreadLocalRandom.current();
+        final int index = random.nextInt(LIMIT);
+        return (char) index;
     }
 
 }

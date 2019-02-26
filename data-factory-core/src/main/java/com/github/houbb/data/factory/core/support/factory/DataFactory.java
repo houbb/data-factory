@@ -1,10 +1,14 @@
 package com.github.houbb.data.factory.core.support.factory;
 
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.core.api.data.primitive.BoolData;
+import com.github.houbb.data.factory.core.api.data.primitive.IntegerData;
 import com.github.houbb.data.factory.core.core.Data;
 import com.github.houbb.data.factory.core.util.DataClassUtil;
+import com.github.houbb.data.factory.core.util.DataPrimitiveUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
+import com.github.houbb.heaven.util.lang.reflect.PrimitiveUtil;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -31,6 +35,9 @@ public final class DataFactory {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         ServiceLoader<IData> dataLoader = ServiceLoader.load(IData.class, classLoader);
 
+        DATA_MAP.put(boolean.class, new BoolData());
+        DATA_MAP.put(int.class, new IntegerData());
+        DATA_MAP.put(byte.class, new IntegerData());
         for (IData data : dataLoader) {
             final Class<? extends IData> clazz = data.getClass();
             final Class genericType = getGenericType(clazz);
@@ -47,7 +54,8 @@ public final class DataFactory {
      * @return 结果
      */
     public static IData getData(final Class clazz) {
-        IData data = DATA_MAP.get(clazz);
+        Class realClazz = DataPrimitiveUtil.getReferenceType(clazz);
+        IData data = DATA_MAP.get(realClazz);
         if(ObjectUtil.isNull(data)) {
             //TODO: 使用 new 的方式，是否造成了内存的浪费？
             data = new Data();

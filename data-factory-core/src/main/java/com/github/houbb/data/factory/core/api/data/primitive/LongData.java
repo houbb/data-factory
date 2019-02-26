@@ -1,7 +1,10 @@
 package com.github.houbb.data.factory.core.api.data.primitive;
 
+import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.google.auto.service.AutoService;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author binbin.hou
@@ -12,8 +15,9 @@ import com.google.auto.service.AutoService;
 public class LongData implements IData<Long> {
 
     @Override
-    public Long build(Class<Long> booleanClass) {
-        return null;
+    public Long build(IContext context, Class<Long> booleanClass) {
+        ThreadLocalRandom random =  ThreadLocalRandom.current();
+        return random.nextLong();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.github.houbb.data.factory.core.api.data.aggregate;
 
+import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
 public class MapData implements IData<Map> {
 
     @Override
-    public Map build(Class<Map> mapClass) {
+    public Map build(IContext context, Class<Map> mapClass) {
         return null;
     }
 
