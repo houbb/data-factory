@@ -1,4 +1,4 @@
-package com.github.houbb.data.factory.core.api.data.reference;
+package com.github.houbb.data.factory.core.api.data.lang;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;

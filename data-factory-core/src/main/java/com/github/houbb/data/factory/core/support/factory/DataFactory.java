@@ -1,20 +1,16 @@
 package com.github.houbb.data.factory.core.support.factory;
 
 import com.github.houbb.data.factory.api.core.IData;
-import com.github.houbb.data.factory.core.api.data.primitive.BoolData;
-import com.github.houbb.data.factory.core.api.data.primitive.IntegerData;
+import com.github.houbb.data.factory.core.api.data.pattern.NullData;
 import com.github.houbb.data.factory.core.core.Data;
 import com.github.houbb.data.factory.core.util.DataClassUtil;
 import com.github.houbb.data.factory.core.util.DataPrimitiveUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
-import com.github.houbb.heaven.util.lang.reflect.PrimitiveUtil;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Map;
-import java.util.ServiceLoader;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -27,9 +23,14 @@ public final class DataFactory {
 
     /**
      * 存放数据实现的 map
-     * TODO: 是否存在并发的问题
+     * 2. 是否需要对原始的包信息进行保护校验。
      */
-    private static final Map<Class, IData> DATA_MAP = new ConcurrentHashMap<>();
+    private static final Map<Class, Class<? extends IData>> DATA_CLASS_MAP = new ConcurrentHashMap<>();
+
+    /**
+     * 空对象模式实现
+     */
+    private static final IData NULL_DATA = new NullData();
 
     static {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -38,9 +39,7 @@ public final class DataFactory {
         for (IData data : dataLoader) {
             final Class<? extends IData> clazz = data.getClass();
             final Class genericType = getGenericType(clazz);
-
-            final IData dataInstance = ClassUtil.newInstance(clazz);
-            DATA_MAP.put(genericType, dataInstance);
+            DATA_CLASS_MAP.put(genericType, clazz);
         }
     }
 
@@ -51,11 +50,17 @@ public final class DataFactory {
      * @return 结果
      */
     public static IData getData(final Class clazz) {
+        // 快速返回
+        if(ObjectUtil.isNull(clazz)) {
+            return NULL_DATA;
+        }
+
+        // 其他已有类型的处理
         Class realClazz = DataPrimitiveUtil.getReferenceType(clazz);
-        IData data = DATA_MAP.get(realClazz);
+        final Class<? extends IData> dataClass = DATA_CLASS_MAP.get(realClazz);
+        IData data = ClassUtil.newInstance(dataClass);
         if(ObjectUtil.isNull(data)) {
-            //TODO:...这里时不支持的类型
-            return null;
+            return NULL_DATA;
         }
         return data;
     }
@@ -76,6 +81,18 @@ public final class DataFactory {
         }
 
         return Data.class;
+    }
+
+    /**
+     * 是否为空对象模式
+     * @param data 类型
+     * @return 是否
+     */
+    public static boolean isNullData(final IData data) {
+        if(ObjectUtil.isNull(data)) {
+            return false;
+        }
+        return NULL_DATA.getClass().equals(data.getClass());
     }
 
 }
