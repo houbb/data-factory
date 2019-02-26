@@ -23,7 +23,7 @@ public final class DataUtil {
      * @return 构建结果
      */
     public static <T> T build(final Class<T> clazz) {
-        IData data = getInstance();
+        IData data = new Data();
         return (T) data.build(null, clazz);
     }
 
@@ -48,12 +48,6 @@ public final class DataUtil {
      */
     public static void clear() {
         THREAD_LOCAL.remove();
-    }
-
-
-    public static void main(String[] args) {
-        System.out.println(DataUtil.build(Boolean.class));
-        System.out.println(DataUtil.build(boolean.class));
     }
 
 }

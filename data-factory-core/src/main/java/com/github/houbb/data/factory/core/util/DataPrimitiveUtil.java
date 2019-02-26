@@ -21,6 +21,7 @@ public class DataPrimitiveUtil {
         PRIMITIVE_REFERENCE_MAP.put(long.class, Long.class);
         PRIMITIVE_REFERENCE_MAP.put(float.class, Float.class);
         PRIMITIVE_REFERENCE_MAP.put(double.class, Double.class);
+        PRIMITIVE_REFERENCE_MAP.put(void.class, Void.class);
     }
 
     /**
@@ -31,9 +32,6 @@ public class DataPrimitiveUtil {
     public static Class getReferenceType(final Class clazz) {
         if(clazz.isPrimitive()) {
             return PRIMITIVE_REFERENCE_MAP.get(clazz);
-        }
-        if(void.class.equals(clazz)) {
-            return Void.class;
         }
         return clazz;
     }

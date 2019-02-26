@@ -36,4 +36,18 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>gen-maven-plugin</artifactId>
+                <version>${plugin.gen.version}</version>
+                <configuration>
+                    <junitVersion>5</junitVersion>
+                    <isOverwriteWhenExists>false</isOverwriteWhenExists>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

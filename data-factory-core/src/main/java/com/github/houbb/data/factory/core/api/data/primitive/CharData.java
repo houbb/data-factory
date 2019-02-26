@@ -4,7 +4,6 @@ import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.google.auto.service.AutoService;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
