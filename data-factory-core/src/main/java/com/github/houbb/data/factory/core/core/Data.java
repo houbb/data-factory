@@ -14,12 +14,6 @@ public class Data<T> implements IData<T> {
 
     @Override
     public T build(IContext context, Class<T> tClass) {
-        // 映射关系的获取，直接根据 SPI 获取，然后反射映射为 map。
-        // 集合
-        // 数组
-        // map
-        // 对象
-        // 其他已有的基本类型
         IData data = DataFactory.getData(tClass);
         return (T) data.build(context, tClass);
     }

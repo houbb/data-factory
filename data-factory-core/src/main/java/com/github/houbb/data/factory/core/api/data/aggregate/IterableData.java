@@ -15,14 +15,14 @@ import java.util.Map;
  * date 2019/2/26
  * @since 0.0.1
  */
-public class IterableData implements IData<Iterable> {
+public class IterableData<T> implements IData<Iterable<T>> {
 
     @Override
-    public Iterable build(IContext context, Class<Iterable> iterableClass) {
+    public Iterable<T> build(IContext context, Class<Iterable<T>> iterableClass) {
         // 直接存放线性表
-        Iterable list = new ArrayList<>();
+        Iterable<T> list = new ArrayList<>();
 
-        final Class<?> itemClass = DataClassUtil.getGenericType(iterableClass, Iterator.class, 0);
+        final Class<?> itemClass = DataClassUtil.getGenericType(iterableClass, Iterable.class, 0);
         final Object object = DataUtil.build(context, itemClass);
         ((ArrayList) list).add(object);
         return list;
