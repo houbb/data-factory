@@ -1,11 +1,10 @@
-package com.github.houbb.data.factory.core.api.data.lang;
+package com.github.houbb.data.factory.core.api.data.util;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.google.auto.service.AutoService;
 
 import java.util.Currency;
-import java.util.Date;
 import java.util.Locale;
 
 /**
