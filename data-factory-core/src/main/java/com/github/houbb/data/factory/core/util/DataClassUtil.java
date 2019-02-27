@@ -1,6 +1,5 @@
 package com.github.houbb.data.factory.core.util;
 
-import com.github.houbb.data.factory.core.core.Data;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 
@@ -28,7 +27,7 @@ public class DataClassUtil {
         Set<Type> currentTypeSet = getGenericInterfaces(clazz);
         typeSet.addAll(currentTypeSet);
 
-        // 所有父类的泛型接口信息
+        // 当前类的父类
         Class superClass = clazz.getSuperclass();
         // 所有的接口对应的泛型接口信息
         while (!Object.class.equals(superClass)) {
@@ -40,14 +39,17 @@ public class DataClassUtil {
             superClass = superClass.getSuperclass();
         }
 
-        // 再次获取接口的父类和接口
-        //避免并发修改集合异常
-//        List<Type> typeList = new ArrayList<>(typeSet);
+        // 最后处理一下接口信息相关的父类信息+父类接口信息
+//        final List<Type> typeList = new ArrayList<>(typeSet);
 //        for(Type type : typeList) {
-//            Set<Type> moreSuperTypeSet = getGenericInterfaces(type.getClass());
-//            typeSet.addAll(moreSuperTypeSet);
+//            if(type instanceof ParameterizedType
+//                    && Collection.class.equals(((ParameterizedType) type).getRawType())) {
+//                final Class rawClass = (Class) ((ParameterizedType) type).getRawType();
+//                final Set<Type> parentInterfaces = getGenericParentInterfaces(rawClass);
+//                System.out.println("-----" + parentInterfaces);
+//                typeSet.addAll(parentInterfaces);
+//            }
 //        }
-//        typeList = null;
 
         return new ArrayList<>(typeSet);
     }
@@ -73,16 +75,32 @@ public class DataClassUtil {
             typeSet.add(superType);
         }
 
-        //3. 遍历获取接口的父类和接口
-        final List<Type> typeList = new ArrayList<>(typeSet);
-        for(Type type : typeList) {
-            //TODO: 异常
-            typeSet.addAll(getGenericInterfaces(type.getClass()));
-        }
-        //4. 遍历获取父级别接口
         return typeSet;
     }
 
+    /**
+     * 获取当前类的父类泛型接口信息
+     * @param clazz 类
+     * @return 泛型接口信息
+     */
+    private static Set<Type> getGenericParentInterfaces(final Class clazz) {
+        Set<Type> typeSet = new HashSet<>();
+
+        // 添加当前泛型父类信息
+        Type supperClass = clazz.getGenericSuperclass();
+        if(ObjectUtil.isNotNull(supperClass)
+            && supperClass.getClass().isInterface()) {
+            typeSet.add(supperClass);
+        }
+
+        // 当前类的泛型父类接口信息
+        Type[] superInterfaces = clazz.getGenericInterfaces();
+        if(ArrayUtil.isNotEmpty(superInterfaces)) {
+            typeSet.addAll(Arrays.asList(superInterfaces));
+        }
+
+        return typeSet;
+    }
 
 
     /**
@@ -98,14 +116,33 @@ public class DataClassUtil {
         List<Type> typeList = DataClassUtil.getAllGenericInterfaces(clazz);
         for(Type type : typeList) {
             if(type instanceof ParameterizedType
-                    && interfaceClass.equals(((ParameterizedType) type).getRawType())) {
+                    && interfaceClass.equals(((ParameterizedType) type).getRawType())
+                     ) {
                 ParameterizedType p = (ParameterizedType)type;
                 return (Class) p.getActualTypeArguments()[index];
             }
         }
 
-        //TODO: 这里不应该返回 data...
         return Object.class;
     }
+
+//    /**
+//     * 获取当前类的泛型类型
+//     * @param clazz 数据类型
+//     * @param index 泛型的下标志位置
+//     * @return 对应的泛型类型
+//     */
+//    public static Class getGenericType(final Class clazz,
+//                                       final int index) {
+//        List<Type> typeList = clazz.getG;
+//        for(Type type : typeList) {
+//            if(type instanceof ParameterizedType) {
+//                ParameterizedType p = (ParameterizedType)type;
+//                return (Class) p.getActualTypeArguments()[index];
+//            }
+//        }
+//
+//        return Object.class;
+//    }
 
 }

@@ -4,6 +4,7 @@ import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 
 /**
+ * 枚举信息的处理
  * @author binbin.hou
  * date 2019/2/27
  * @since 0.0.1

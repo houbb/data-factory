@@ -35,7 +35,7 @@ public class DataUtilAggregateTest {
      */
     @Test
     public void buildIterableBaseTest() throws Exception {
-        Collection<String> strings = new ArrayList<>();
+        Collection<String> strings = new ArrayList<String>();
         Collection<String> result = DataUtil.build(strings.getClass());
         System.out.println(result);
     }
