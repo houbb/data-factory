@@ -3,9 +3,10 @@ package com.github.houbb.data.factory.core.support.factory;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.api.data.aggregate.ArrayData;
 import com.github.houbb.data.factory.core.api.data.aggregate.BeanData;
+import com.github.houbb.data.factory.core.api.data.aggregate.EnumData;
 import com.github.houbb.data.factory.core.api.data.aggregate.IterableData;
 import com.github.houbb.data.factory.core.api.data.aggregate.MapData;
-import com.github.houbb.data.factory.core.api.data.pattern.NullData;
+import com.github.houbb.data.factory.core.api.data.aggregate.NullData;
 import com.github.houbb.data.factory.core.util.DataClassUtil;
 import com.github.houbb.data.factory.core.util.DataPrimitiveUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
@@ -69,8 +70,11 @@ public final class DataFactory {
         if(ClassTypeUtil.isIterable(clazz)) {
             return new IterableData();
         }
-        if(ClassTypeUtil.isMap(clazz)) {
+        if(Map.class.isAssignableFrom(clazz)) {
             return new MapData();
+        }
+        if(clazz.isEnum()) {
+            return new EnumData();
         }
 
         // JDK 相关类型

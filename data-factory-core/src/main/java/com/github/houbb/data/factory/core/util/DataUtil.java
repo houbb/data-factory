@@ -22,6 +22,7 @@ public final class DataUtil {
      * 构建结果
      * @param clazz 类型
      * @return 构建结果
+     * @param <T> 泛型
      */
     public static <T> T build(final Class<T> clazz) {
         IData data = getInstance();
@@ -33,6 +34,7 @@ public final class DataUtil {
      * @param context 执行上下文
      * @param clazz 类型
      * @return 构建结果
+     * @param <T> 泛型
      */
     public static <T> T build(final IContext context, final Class<T> clazz) {
         IData data = getInstance();

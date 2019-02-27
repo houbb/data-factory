@@ -1,4 +1,9 @@
-package com.github.houbb.data.factory.core.api.data.pattern;
+/*
+ * Copyright (c)  2019. houbinbin Inc.
+ * data-factory All rights reserved.
+ */
+
+package com.github.houbb.data.factory.core.api.data.aggregate;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;

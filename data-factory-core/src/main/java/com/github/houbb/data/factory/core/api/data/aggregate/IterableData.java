@@ -2,18 +2,22 @@ package com.github.houbb.data.factory.core.api.data.aggregate;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
-import com.github.houbb.data.factory.core.util.DataClassUtil;
+import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
 import com.github.houbb.data.factory.core.util.DataUtil;
+import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
-import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.sun.jmx.remote.internal.ArrayQueue;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 
 /**
  * map 集合的实现
@@ -26,50 +30,41 @@ public class IterableData<T> implements IData<Iterable<T>> {
     @Override
     public Iterable<T> build(IContext context, Class<Iterable<T>> iterableClass) {
         // 直接存放线性表
-        Iterable<T> list = new ArrayList<>();
+        Iterable<T> result = newInstance(iterableClass);
+        if(CollectionUtil.isEmpty(context.getGenericList())) {
+            return result;
+        }
 
         // 获取元素类型
-        final Class<?> itemClass = iterableClass.getComponentType();
-        final Object object = DataUtil.build(context, itemClass);
-        ((ArrayList) list).add(object);
-        return list;
+        final Class<T> itemClass = context.getGenericList().get(0);
+        final T object = DataUtil.build(context, itemClass);
+
+        // 新增元素
+        ((Collection<T>) result).add(object);
+
+        return result;
     }
 
     /**
-     * TODO: 因为泛型擦除，无法获取到对应的泛型信息
-     * @param args
+     * 创建对应的实例
+     * @param iterableClass 类
+     * @return 结果
      */
-    public static void main(String[] args) {
-        // 字段。
-        List<String> stringList = new ArrayList<>();
-        ObjectTest<String> objectTest = new ObjectTest<>();
-        objectTest.setIterable(stringList);
-
-        for(Field field : ClassUtil.getAllFieldList(objectTest.getClass())) {
-            Type genericType = field.getGenericType();
-            if(genericType == null) continue;
-            // 如果是泛型参数的类型
-            if(genericType instanceof ParameterizedType){
-                ParameterizedType pt = (ParameterizedType) genericType;
-                //得到泛型里的class类型对象
-                if(pt.getActualTypeArguments()[0] instanceof Class) {
-                    Class<?> genericClazz = (Class<?>)pt.getActualTypeArguments()[0];
-                    System.out.println("result: " + genericClazz);
-                }
+    private Iterable<T> newInstance(final Class<Iterable<T>> iterableClass) {
+        try {
+            return ClassUtil.newInstance(iterableClass);
+        } catch (Exception e) {
+            if(List.class.isAssignableFrom(iterableClass)) {
+                return new ArrayList<>();
             }
-            System.out.println();
+            if(Set.class.isAssignableFrom(iterableClass)) {
+                return new HashSet<>();
+            }
+            if(Queue.class.isAssignableFrom(iterableClass)) {
+                return new ArrayDeque<>();
+            }
+            throw new DataFactoryRuntionException(e);
         }
-
-//        System.out.println(stringList.getClass());
-//        String[] strings = (String[]) ArrayUtil.toArray(stringList);
-//        System.out.println(strings.getClass().getComponentType());
-//        Type type = stringList.getClass();
-//        if(type instanceof ParameterizedType){
-//            ParameterizedType pt = (ParameterizedType) type;
-//            //得到泛型里的class类型对象
-//            Class<?> genericClazz = (Class<?>)pt.getActualTypeArguments()[0];
-//            System.out.println(genericClazz);
-//        }
     }
 
 }

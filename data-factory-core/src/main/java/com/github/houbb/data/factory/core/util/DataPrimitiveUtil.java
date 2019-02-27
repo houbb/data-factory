@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 基本类型工具类
  * @author binbin.hou
  * date 2019/2/26
  * @since 0.0.1
  */
 public class DataPrimitiveUtil {
 
-    public static final Map<Class, Class> PRIMITIVE_REFERENCE_MAP = new HashMap<>();
+    private static final Map<Class, Class> PRIMITIVE_REFERENCE_MAP = new HashMap<>();
 
     static {
         PRIMITIVE_REFERENCE_MAP.put(int.class, Integer.class);
