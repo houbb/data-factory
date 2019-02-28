@@ -2,21 +2,13 @@ package com.github.houbb.data.factory.core.api.data.aggregate;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
-import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
-import com.github.houbb.data.factory.core.util.DataClassUtil;
 import com.github.houbb.data.factory.core.util.DataUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 
 /**
  * map 集合的实现
