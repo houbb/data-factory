@@ -2,11 +2,10 @@ package com.github.houbb.data.factory.core.api.data.math;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.core.api.data.annotation.AbstractNumberData;
 import com.google.auto.service.AutoService;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * BigInteger 的实现处理
@@ -15,11 +14,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * @since 0.0.1
  */
 @AutoService(IData.class)
-public class BigIntegerData implements IData<BigInteger> {
+public class BigIntegerData extends AbstractNumberData implements IData<BigInteger> {
+
     @Override
     public BigInteger build(IContext context, Class<BigInteger> bigIntegerClass) {
-        ThreadLocalRandom random = ThreadLocalRandom.current();
-        final String string = String.valueOf(random.nextInt());
+        final String string = super.contactInt(context);
         return new BigInteger(string);
     }
+
 }

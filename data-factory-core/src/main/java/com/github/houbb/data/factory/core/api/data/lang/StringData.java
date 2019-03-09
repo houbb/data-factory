@@ -1,7 +1,10 @@
 package com.github.houbb.data.factory.core.api.data.lang;
 
+import com.github.houbb.data.factory.api.annotation.DataFactory;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.google.auto.service.AutoService;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -23,7 +26,7 @@ public class StringData implements IData<String> {
     @Override
     public String build(IContext context, Class<String> booleanClass) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        int randomLength = getRandomLength(random);
+        int randomLength = getRandomLength(context, random);
         StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < randomLength; i++) {
             int charIndex = random.nextInt(CHARS.length);
@@ -35,11 +38,38 @@ public class StringData implements IData<String> {
     /**
      * 获取随机的长度
      * 1-10 随机长度
+     * @param context 执行上下文
      * @param random 随机
      * @return 长度
      */
-    private int getRandomLength(ThreadLocalRandom random) {
-        return 1+random.nextInt(9);
+    private int getRandomLength(final IContext context, final ThreadLocalRandom random) {
+        int minLenResult = 1;
+        int maxLenResult = 10;
+
+        DataFactory dataFactory = context.getDataFactory();
+        if(ObjectUtil.isNotNull(dataFactory)) {
+            paramCheck(dataFactory);
+
+            minLenResult = dataFactory.minLen();
+            maxLenResult = dataFactory.maxLen();
+        }
+        return minLenResult+random.nextInt(maxLenResult-1);
+    }
+
+    /**
+     * 参数校验
+     * @param dataFactory 注解
+     */
+    private void paramCheck(DataFactory dataFactory) {
+        int minLen = dataFactory.minLen();
+        int maxLen = dataFactory.maxLen();
+
+        if(minLen < 0) {
+            throw new DataFactoryRuntionException("DataFactory.minLen() not allow less than 0.");
+        }
+        if(minLen > maxLen) {
+            throw new DataFactoryRuntionException("DataFactory.maxLen() not allow less than DataFactory.minLen().");
+        }
     }
 
 }

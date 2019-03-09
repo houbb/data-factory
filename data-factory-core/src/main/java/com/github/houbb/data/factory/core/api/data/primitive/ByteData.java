@@ -2,10 +2,8 @@ package com.github.houbb.data.factory.core.api.data.primitive;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.core.api.data.annotation.AbstractNumberData;
 import com.google.auto.service.AutoService;
-
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author binbin.hou
@@ -13,13 +11,21 @@ import java.util.concurrent.ThreadLocalRandom;
  * @since 0.0.1
  */
 @AutoService(IData.class)
-public class ByteData implements IData<Byte> {
+public class ByteData extends AbstractNumberData implements IData<Byte> {
 
     @Override
     public Byte build(IContext context, Class<Byte> booleanClass) {
-        ThreadLocalRandom random =  ThreadLocalRandom.current();
-        String indexString = String.valueOf(random.nextInt(127)-128);
-        return Byte.valueOf(indexString);
+        String string = super.contactInt(context);
+        return Byte.valueOf(string);
     }
 
+    @Override
+    protected int getMin() {
+        return Byte.MIN_VALUE;
+    }
+
+    @Override
+    protected int getMax() {
+        return Byte.MAX_VALUE;
+    }
 }

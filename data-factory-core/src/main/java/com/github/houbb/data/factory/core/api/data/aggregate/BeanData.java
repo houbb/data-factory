@@ -3,6 +3,7 @@ package com.github.houbb.data.factory.core.api.data.aggregate;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
+import com.github.houbb.data.factory.core.api.data.annotation.DataFactoryAnnotationData;
 import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
 import com.github.houbb.data.factory.core.util.DataUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
@@ -35,10 +36,9 @@ public class BeanData<T> implements IData<T> {
                 if(Modifier.isFinal(field.getModifiers())) {
                     continue;
                 }
-                Class<?> fieldType = field.getType();
                 // 初始化上下文
                 buildContext(context, field);
-                Object value = DataUtil.build(context, fieldType);
+                Object value = DataFactoryAnnotationData.getInstance().build(context, tClass);
                 field.set(instance, value);
             }
             return instance;
@@ -54,25 +54,29 @@ public class BeanData<T> implements IData<T> {
      * @return 执行的上下问
      */
     private IContext buildContext(IContext context, Field field) {
-
         final Class fieldType = field.getType();
         Type type = field.getGenericType();
-        if(type instanceof ParameterizedType) {
-            List<Class> genericTypeList = new ArrayList<>();
-            // 可遍历的集合
-            if(ClassTypeUtil.isIterable(fieldType)) {
-                Class geneicType = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
-                genericTypeList.add(geneicType);
-                ((DefaultDataContext) context).setGenericList(genericTypeList);
-            }
 
-            // map
-            if(Map.class.isAssignableFrom(fieldType)) {
-                Class geneicKeyType = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
-                Class geneicValueType = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
-                genericTypeList.add(geneicKeyType);
-                genericTypeList.add(geneicValueType);
-                ((DefaultDataContext) context).setGenericList(genericTypeList);
+        if(context instanceof DefaultDataContext) {
+            DefaultDataContext defaultDataContext = (DefaultDataContext)context;
+            defaultDataContext.setCurrentField(field);
+            if(type instanceof ParameterizedType) {
+                List<Class> genericTypeList = new ArrayList<>();
+                // 可遍历的集合
+                if(ClassTypeUtil.isIterable(fieldType)) {
+                    Class genericType = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
+                    genericTypeList.add(genericType);
+                    defaultDataContext.setGenericList(genericTypeList);
+                }
+
+                // map
+                if(Map.class.isAssignableFrom(fieldType)) {
+                    Class genericKeyType = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
+                    Class genericValueType = (Class) ((ParameterizedType) type).getActualTypeArguments()[0];
+                    genericTypeList.add(genericKeyType);
+                    genericTypeList.add(genericValueType);
+                    defaultDataContext.setGenericList(genericTypeList);
+                }
             }
         }
 

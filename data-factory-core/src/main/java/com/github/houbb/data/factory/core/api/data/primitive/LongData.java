@@ -2,6 +2,7 @@ package com.github.houbb.data.factory.core.api.data.primitive;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.core.api.data.annotation.AbstractNumberData;
 import com.google.auto.service.AutoService;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -12,12 +13,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * @since 0.0.1
  */
 @AutoService(IData.class)
-public class LongData implements IData<Long> {
+public class LongData extends AbstractNumberData implements IData<Long> {
 
     @Override
     public Long build(IContext context, Class<Long> booleanClass) {
-        ThreadLocalRandom random =  ThreadLocalRandom.current();
-        return random.nextLong();
+        final String string = super.contactInt(context);
+        return Long.valueOf(string);
     }
 
 }

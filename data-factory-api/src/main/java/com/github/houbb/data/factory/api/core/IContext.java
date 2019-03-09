@@ -1,5 +1,8 @@
 package com.github.houbb.data.factory.api.core;
 
+import com.github.houbb.data.factory.api.annotation.DataFactory;
+
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -18,5 +21,19 @@ public interface IContext {
      * @return 泛型列表
      */
     List<Class> getGenericList();
+
+    /**
+     * 获取当前字段信息
+     * @since 0.0.2
+     * @return 当前字段信息
+     */
+    Field getCurrentField();
+
+    /**
+     * 获取注解信息
+     * @since 0.0.2
+     * @return 注解信息
+     */
+    DataFactory getDataFactory();
 
 }

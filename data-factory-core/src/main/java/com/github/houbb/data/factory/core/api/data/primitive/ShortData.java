@@ -2,6 +2,7 @@ package com.github.houbb.data.factory.core.api.data.primitive;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.core.api.data.annotation.AbstractNumberData;
 import com.google.auto.service.AutoService;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,12 +14,21 @@ import java.util.concurrent.ThreadLocalRandom;
  * @since 0.0.1
  */
 @AutoService(IData.class)
-public class ShortData implements IData<Short> {
+public class ShortData extends AbstractNumberData implements IData<Short> {
 
     @Override
     public Short build(IContext context, Class<Short> booleanClass) {
-        ThreadLocalRandom random =  ThreadLocalRandom.current();
-        return (short)random.nextInt(Short.MAX_VALUE);
+        final String string = super.contactInt(context);
+        return Short.valueOf(string);
     }
 
+    @Override
+    protected int getMin() {
+        return Short.MIN_VALUE;
+    }
+
+    @Override
+    protected int getMax() {
+        return Short.MAX_VALUE;
+    }
 }
