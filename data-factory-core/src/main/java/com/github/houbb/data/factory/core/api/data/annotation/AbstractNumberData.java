@@ -57,7 +57,7 @@ public abstract class AbstractNumberData {
         }
 
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        int randomInt = random.nextInt(minResult, maxResult-minResult);
+        int randomInt = random.nextInt(minResult, maxResult);
         return String.valueOf(randomInt);
     }
 
@@ -93,8 +93,8 @@ public abstract class AbstractNumberData {
         //1. 参数范围的校验
         DataFactory dataFactory = context.getDataFactory();
         if(ObjectUtil.isNotNull(dataFactory)) {
-            int precision = dataFactory.precision();
-            if(precision < 0) {
+            precisionResult = dataFactory.precision();
+            if(precisionResult < 0) {
                 throw new DataFactoryRuntionException("DataFactory.precision() is not allow less than 0.");
             }
         }

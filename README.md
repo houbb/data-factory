@@ -6,7 +6,6 @@
 [![Build Status](https://www.travis-ci.org/houbb/data-factory.svg?branch=master)](https://www.travis-ci.org/houbb/data-factory?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/houbb/data-factory/badge.svg?branch=master)](https://coveralls.io/github/houbb/data-factory?branch=master)
 
-
 ## 特性
 
 - 8 大基本类型的支持
@@ -14,6 +13,8 @@
 - String、Date、金额，日期等常见类型的支持
 
 - java8 常见时间类的支持
+
+- 支持 String 和 Number 类型的注解定义
 
 # 变更日志
 
@@ -64,7 +65,7 @@ Maven 3.0+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>data-factory-core</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
@@ -109,3 +110,7 @@ User{name='wZ8CJZtK', age=-564106861, birthday=Wed Feb 27 22:14:34 CST 2019, str
 ```
 
 内容每次都随机。便于基本的测试数据填充。
+
+# 拓展阅读
+
+[DataFactory-01-注解支持](doc/blog/DataFactory-01-注解支持.md)

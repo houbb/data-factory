@@ -3,12 +3,12 @@ package com.github.houbb.data.factory.core.model.annotation;
 import com.github.houbb.data.factory.api.annotation.DataFactory;
 
 /**
- * 注解测试
+ * 字符串类注解测试
  * @author binbin.hou
  * @date 2019/3/9
  * @since 0.0.2
  */
-public class UserAnnotation {
+public class UserAnnotationString {
 
     /**
      * 指定最小长度，最大长度
@@ -38,11 +38,4 @@ public class UserAnnotation {
         this.hobby = hobby;
     }
 
-    @Override
-    public String toString() {
-        return "UserAnnotation{" +
-                "name='" + name + '\'' +
-                ", hobby='" + hobby + '\'' +
-                '}';
-    }
 }

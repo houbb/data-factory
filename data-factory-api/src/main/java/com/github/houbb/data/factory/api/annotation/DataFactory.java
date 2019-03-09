@@ -22,21 +22,24 @@ public @interface DataFactory {
     boolean ignore() default false;
 
     /**
-     * 最大值。只作用于数字类型的字段
+     * 数字整数部分最大值。
+     * 只作用于数字类型的字段
      *
      * @return 返回最大值
      */
     int max() default 100;
 
     /**
-     * 最小值。只作用于数字类型的字段
+     * 数字整数部分最小值。
+     * 只作用于数字类型的字段
      *
      * @return 返回最小值
      */
     int min() default 0;
 
     /**
-     * 精度。只作用于Float类型和和Double类型。
+     * 精度。
+     * 作用于Float、Double、BigDecimal 小数部分长度
      *
      * @return 返回精度
      */
