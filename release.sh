@@ -2,9 +2,9 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="${version}"
-newVersion="${version}"
-projectName="${artifactId}"
+oldVersion="data-factory"
+newVersion="0.0.2"
+projectName="0.0.3"
 
 # release 项目版本
 ## snapshot 版本号
