@@ -2,9 +2,9 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="data-factory"
-newVersion="0.0.2"
-projectName="0.0.3"
+oldVersion="0.0.2"
+newVersion="0.0.3"
+projectName="data-factory"
 
 # release 项目版本
 ## snapshot 版本号
@@ -68,6 +68,7 @@ echo "6. MODIFY ${release_version} TO ${snapshot_new_version} DONE."
 
 echo "============================= RELEASE END..."
 
+git branch -a
 
 # 使用方式：
 # 1. 赋值权限： chmod +x ./release.sh
