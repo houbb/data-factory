@@ -59,4 +59,11 @@ public @interface DataFactory {
      */
     int minLen() default 1;
 
+    /**
+     * 正则表达式
+     * @since 0.0.3
+     * @return 表达式信息
+     */
+    String regex() default "";
+
 }
