@@ -16,6 +16,10 @@
 
 - 支持 String 和 Number 类型的注解定义
 
+- 添加 `@DataFactory` 注解支持 
+
+- 支持 Regex 正则表达式
+
 # 变更日志
 
 > [变更日志](doc/CHANGELOG.md)
@@ -65,7 +69,7 @@ Maven 3.0+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>data-factory-core</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
@@ -114,3 +118,5 @@ User{name='wZ8CJZtK', age=-564106861, birthday=Wed Feb 27 22:14:34 CST 2019, str
 # 拓展阅读
 
 [DataFactory-01-注解支持](doc/blog/DataFactory-01-注解支持.md)
+
+[DataFactory-02-正则表达式支持](doc/blog/DataFactory-02-正则表达式支持.md)

@@ -2,7 +2,10 @@ package com.github.houbb.data.factory.core.model.regex;
 
 import com.github.houbb.data.factory.api.annotation.DataFactory;
 
+import java.math.BigDecimal;
+
 /**
+ * 正则表达式测试对象
  * @author binbin.hou
  * @date 2019/3/12
  * @since 0.0.3
@@ -13,7 +16,10 @@ public class RegexBean {
     private String name;
 
     @DataFactory(regex = "[0-9]{1,2}")
-    private Integer age;
+    private int age;
+
+    @DataFactory(regex = "[0-9]{1,2}")
+    private BigDecimal amount;
 
     public String getName() {
         return name;
@@ -30,4 +36,22 @@ public class RegexBean {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "RegexBean{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", amount=" + amount +
+                '}';
+    }
+
 }

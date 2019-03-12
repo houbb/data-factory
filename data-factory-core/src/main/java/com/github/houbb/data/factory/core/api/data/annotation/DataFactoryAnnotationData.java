@@ -6,7 +6,7 @@ import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.api.core.IRegexGen;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
 import com.github.houbb.data.factory.core.api.regex.DefaultRegexGen;
-import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
+import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
 import com.github.houbb.data.factory.core.util.DataPrimitiveUtil;
 import com.github.houbb.data.factory.core.util.DataUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
@@ -95,7 +95,7 @@ public class DataFactoryAnnotationData implements IData<Object> {
             return constructor.newInstance(string);
         } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             //TODO: 这里应该考虑到有些没有提供 String 构造器的类。
-            throw new DataFactoryRuntionException(e);
+            throw new DataFactoryRuntimeException(e);
         }
     }
 

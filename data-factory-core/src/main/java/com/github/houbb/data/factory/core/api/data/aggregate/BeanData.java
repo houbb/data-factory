@@ -4,8 +4,7 @@ import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
 import com.github.houbb.data.factory.core.api.data.annotation.DataFactoryAnnotationData;
-import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
-import com.github.houbb.data.factory.core.util.DataUtil;
+import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 
@@ -43,7 +42,7 @@ public class BeanData<T> implements IData<T> {
             }
             return instance;
         } catch (IllegalAccessException e) {
-            throw new DataFactoryRuntionException(e);
+            throw new DataFactoryRuntimeException(e);
         }
     }
 

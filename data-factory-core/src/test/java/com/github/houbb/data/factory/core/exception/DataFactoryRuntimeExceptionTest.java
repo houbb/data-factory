@@ -3,17 +3,17 @@ package com.github.houbb.data.factory.core.exception;
 import org.junit.jupiter.api.Test;
 
 /**
-* <p> DataFactoryRuntionException Tester. </p>
+* <p> DataFactoryRuntimeException Tester. </p>
 * <p> 2019-02-26 16:20:40.542 </p>
 *
 * @author binbin.hou
 * @version 0.0.1-SNAPSHOT
 */
-public class DataFactoryRuntionExceptionTest {
+public class DataFactoryRuntimeExceptionTest {
 
     /**
     *
-    * Method: DataFactoryRuntionException()
+    * Method: DataFactoryRuntimeException()
     */
     @Test
     public void DataFactoryRuntionExceptionTest() throws Exception {
@@ -21,7 +21,7 @@ public class DataFactoryRuntionExceptionTest {
 
     /**
     *
-    * Method: DataFactoryRuntionException(message)
+    * Method: DataFactoryRuntimeException(message)
     */
     @Test
     public void DataFactoryRuntionExceptionMessageTest() throws Exception {
@@ -29,7 +29,7 @@ public class DataFactoryRuntionExceptionTest {
 
     /**
     *
-    * Method: DataFactoryRuntionException(message, cause)
+    * Method: DataFactoryRuntimeException(message, cause)
     */
     @Test
     public void DataFactoryRuntionExceptionMessageCauseTest() throws Exception {
@@ -37,7 +37,7 @@ public class DataFactoryRuntionExceptionTest {
 
     /**
     *
-    * Method: DataFactoryRuntionException(cause)
+    * Method: DataFactoryRuntimeException(cause)
     */
     @Test
     public void DataFactoryRuntionExceptionCauseTest() throws Exception {
@@ -45,7 +45,7 @@ public class DataFactoryRuntionExceptionTest {
 
     /**
     *
-    * Method: DataFactoryRuntionException(message, cause, enableSuppression, writableStackTrace)
+    * Method: DataFactoryRuntimeException(message, cause, enableSuppression, writableStackTrace)
     */
     @Test
     public void DataFactoryRuntionExceptionMessageCauseEnableSuppressionWritableStackTraceTest() throws Exception {

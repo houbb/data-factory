@@ -3,7 +3,7 @@ package com.github.houbb.data.factory.core.api.data.lang;
 import com.github.houbb.data.factory.api.annotation.DataFactory;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
-import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
+import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.google.auto.service.AutoService;
 
@@ -65,10 +65,10 @@ public class StringData implements IData<String> {
         int maxLen = dataFactory.maxLen();
 
         if(minLen < 0) {
-            throw new DataFactoryRuntionException("DataFactory.minLen() not allow less than 0.");
+            throw new DataFactoryRuntimeException("DataFactory.minLen() not allow less than 0.");
         }
         if(minLen > maxLen) {
-            throw new DataFactoryRuntionException("DataFactory.maxLen() not allow less than DataFactory.minLen().");
+            throw new DataFactoryRuntimeException("DataFactory.maxLen() not allow less than DataFactory.minLen().");
         }
     }
 

@@ -62,6 +62,9 @@ public @interface DataFactory {
     /**
      * 正则表达式
      * 1. 当前版本为了简单方便，如果 regex 存在，则直接忽略长度，精度等其他注解配置。
+     * 2. 建议直接使用在 String 类型
+     * 3. 如果使用其他类型，则必须保证提供了对应的 String 构造器。如{@link Long#Long(String)}
+     * 4. 基本类型会直接使用对应的包装类型。
      * @since 0.0.3
      * @return 表达式信息
      */

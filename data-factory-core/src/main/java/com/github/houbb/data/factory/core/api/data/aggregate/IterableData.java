@@ -2,20 +2,16 @@ package com.github.houbb.data.factory.core.api.data.aggregate;
 
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
-import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
+import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
 import com.github.houbb.data.factory.core.util.DataUtil;
-import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.sun.jmx.remote.internal.ArrayQueue;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -63,7 +59,7 @@ public class IterableData<T> implements IData<Iterable<T>> {
             if(Queue.class.isAssignableFrom(iterableClass)) {
                 return new ArrayDeque<>();
             }
-            throw new DataFactoryRuntionException(e);
+            throw new DataFactoryRuntimeException(e);
         }
     }
 

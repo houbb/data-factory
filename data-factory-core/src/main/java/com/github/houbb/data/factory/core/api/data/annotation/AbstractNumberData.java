@@ -2,7 +2,7 @@ package com.github.houbb.data.factory.core.api.data.annotation;
 
 import com.github.houbb.data.factory.api.annotation.DataFactory;
 import com.github.houbb.data.factory.api.core.IContext;
-import com.github.houbb.data.factory.core.exception.DataFactoryRuntionException;
+import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
@@ -69,16 +69,16 @@ public abstract class AbstractNumberData {
         int min = dataFactory.min();
         int max = dataFactory.max();
         if(min > max) {
-            throw new DataFactoryRuntionException("DataFactory.min() is not allow great than dataFactory.max().");
+            throw new DataFactoryRuntimeException("DataFactory.min() is not allow great than dataFactory.max().");
         }
 
         int minAllow = getMin();
         int maxAllow = getMax();
         if(min < minAllow) {
-            throw new DataFactoryRuntionException("DataFactory.min() is not allow less than " + minAllow);
+            throw new DataFactoryRuntimeException("DataFactory.min() is not allow less than " + minAllow);
         }
         if(max > maxAllow) {
-            throw new DataFactoryRuntionException("DataFactory.max() is not allow great than " + maxAllow);
+            throw new DataFactoryRuntimeException("DataFactory.max() is not allow great than " + maxAllow);
         }
     }
 
@@ -95,7 +95,7 @@ public abstract class AbstractNumberData {
         if(ObjectUtil.isNotNull(dataFactory)) {
             precisionResult = dataFactory.precision();
             if(precisionResult < 0) {
-                throw new DataFactoryRuntionException("DataFactory.precision() is not allow less than 0.");
+                throw new DataFactoryRuntimeException("DataFactory.precision() is not allow less than 0.");
             }
         }
 
