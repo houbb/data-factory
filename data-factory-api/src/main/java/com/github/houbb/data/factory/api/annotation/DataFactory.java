@@ -61,6 +61,7 @@ public @interface DataFactory {
 
     /**
      * 正则表达式
+     * 1. 当前版本为了简单方便，如果 regex 存在，则直接忽略长度，精度等其他注解配置。
      * @since 0.0.3
      * @return 表达式信息
      */

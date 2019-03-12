@@ -38,6 +38,7 @@
         <junit5.version>5.2.0</junit5.version>
         <apiguardian-api.version>1.0.0</apiguardian-api.version>
         <auto-service.version>1.0-rc4</auto-service.version>
+        <generex.version>1.0.2</generex.version>
     </properties>
 
 
@@ -86,6 +87,12 @@
                 <groupId>com.google.auto.service</groupId>
                 <artifactId>auto-service</artifactId>
                 <version>${auto-service.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.mifmif</groupId>
+                <artifactId>generex</artifactId>
+                <version>${generex.version}</version>
             </dependency>
 
         </dependencies>
