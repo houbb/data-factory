@@ -10,7 +10,7 @@
     <parent>
         <artifactId>data-factory</artifactId>
         <groupId>com.github.houbb</groupId>
-        <version>0.0.4</version>
+        <version>0.0.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -50,6 +50,14 @@
                 <configuration>
                     <junitVersion>5</junitVersion>
                     <isOverwriteWhenExists>false</isOverwriteWhenExists>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>

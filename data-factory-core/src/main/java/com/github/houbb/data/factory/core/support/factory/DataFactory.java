@@ -7,12 +7,29 @@ import com.github.houbb.data.factory.core.api.data.aggregate.EnumData;
 import com.github.houbb.data.factory.core.api.data.aggregate.IterableData;
 import com.github.houbb.data.factory.core.api.data.aggregate.MapData;
 import com.github.houbb.data.factory.core.api.data.aggregate.NullData;
+import com.github.houbb.data.factory.core.api.data.lang.StringData;
+import com.github.houbb.data.factory.core.api.data.math.BigDecimalData;
+import com.github.houbb.data.factory.core.api.data.math.BigIntegerData;
+import com.github.houbb.data.factory.core.api.data.primitive.*;
+import com.github.houbb.data.factory.core.api.data.time.LocalDateData;
+import com.github.houbb.data.factory.core.api.data.time.LocalDateTimeData;
+import com.github.houbb.data.factory.core.api.data.time.LocalTimeData;
+import com.github.houbb.data.factory.core.api.data.time.YearData;
+import com.github.houbb.data.factory.core.api.data.util.CurrencyData;
+import com.github.houbb.data.factory.core.api.data.util.DateData;
 import com.github.houbb.data.factory.core.util.DataClassUtil;
 import com.github.houbb.data.factory.core.util.DataPrimitiveUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
+import com.github.houbb.heaven.util.util.MapUtil;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Year;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,17 +44,48 @@ public final class DataFactory {
     /**
      * 存放数据实现的 map
      */
-    private static final Map<Class, Class<? extends IData>> DATA_CLASS_MAP = new ConcurrentHashMap<>();
+    private static final Map<Class, IData> DATA_CLASS_MAP = new HashMap<>();
 
     static {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        ServiceLoader<IData> dataLoader = ServiceLoader.load(IData.class, classLoader);
+        DATA_CLASS_MAP.put(String.class, new StringData());
+        DATA_CLASS_MAP.put(BigDecimal.class, new BigDecimalData());
+        DATA_CLASS_MAP.put(BigInteger.class, new BigIntegerData());
+        DATA_CLASS_MAP.put(Boolean.class, new BoolData());
+        DATA_CLASS_MAP.put(Byte.class, new ByteData());
+        DATA_CLASS_MAP.put(Character.class, new CharData());
+        DATA_CLASS_MAP.put(Double.class, new DoubleData());
+        DATA_CLASS_MAP.put(Float.class, new FloatData());
+        DATA_CLASS_MAP.put(Integer.class, new IntegerData());
+        DATA_CLASS_MAP.put(Long.class, new LongData());
+        DATA_CLASS_MAP.put(Short.class, new ShortData());
+        DATA_CLASS_MAP.put(Void.class, new VoidData());
+        DATA_CLASS_MAP.put(LocalDate.class, new LocalDateData());
+        DATA_CLASS_MAP.put(LocalDateTime.class, new LocalDateTimeData());
+        DATA_CLASS_MAP.put(LocalTime.class, new LocalTimeData());
+        DATA_CLASS_MAP.put(Year.class, new YearData());
+        DATA_CLASS_MAP.put(Currency.class, new CurrencyData());
+        DATA_CLASS_MAP.put(Date.class, new DateData());
+    }
 
-        for (IData data : dataLoader) {
-            final Class<? extends IData> clazz = data.getClass();
-            if(isDataFactoryClass(clazz)) {
-                final Class genericType = DataClassUtil.getGenericType(clazz, IData.class, 0);
-                DATA_CLASS_MAP.put(genericType, clazz);
+    /**
+     * 初始化数据工厂
+     * 这种写法虽然优雅，但是总会有用户不开启运行时注解。
+     * @since 0.0.5
+     */
+    @Deprecated
+    private static void initDataFactory() {
+        synchronized (DATA_CLASS_MAP) {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            ServiceLoader<IData> dataLoader = ServiceLoader.load(IData.class, classLoader);
+
+            for (IData data : dataLoader) {
+                final Class<? extends IData> clazz = data.getClass();
+                if(isDataFactoryClass(clazz)) {
+                    final Class genericType = DataClassUtil.getGenericType(clazz, IData.class, 0);
+                    System.out.println(String.format("DATA_CLASS_MAP.put(%s.class, new %s());", genericType.getSimpleName(),
+                            data.getClass().getSimpleName()));
+                    DATA_CLASS_MAP.put(genericType, data);
+                }
             }
         }
     }
@@ -80,11 +128,14 @@ public final class DataFactory {
         // JDK 相关类型
         if(ClassTypeUtil.isJdk(clazz)) {
             Class realClazz = DataPrimitiveUtil.getReferenceType(clazz);
-            final Class<? extends IData> dataClass = DATA_CLASS_MAP.get(realClazz);
-            if(ObjectUtil.isNull(dataClass)) {
+            if(MapUtil.isEmpty(DATA_CLASS_MAP)) {
+                initDataFactory();
+            }
+            final IData data = DATA_CLASS_MAP.get(realClazz);
+            if(ObjectUtil.isNull(data)) {
                 return NullData.INSTANCE;
             }
-            return ClassUtil.newInstance(dataClass);
+            return data;
         }
 
         // 用户自定义 java bean

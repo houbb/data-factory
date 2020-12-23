@@ -24,35 +24,6 @@
 
 > [变更日志](doc/CHANGELOG.md)
 
-# 核心类讲解
-
-## DataUtil 工具类
-
-提供线程安全的方法：
-
-```java
-/**
- * 构建结果
- * @param clazz 类型
- * @return 构建结果
- */
-public static <T> T build(final Class<T> clazz) {
-    IData data = getInstance();
-    return (T) data.build(null, clazz);
-}
-
-/**
- * 构建结果
- * @param context 执行上下文
- * @param clazz 类型
- * @return 构建结果
- */
-public static <T> T build(final IContext context, final Class<T> clazz) {
-    IData data = getInstance();
-    return (T) data.build(context, clazz);
-}
-```
-
 # 快速开始
 
 ## 准备工作
@@ -61,15 +32,13 @@ JDK 1.8+
 
 Maven 3.0+ 
 
-如果是 idea，测试的时候 `Enable Annotation Processing`。
-
 ## maven 引入
 
 ```xml
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>data-factory-core</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
@@ -120,3 +89,13 @@ User{name='wZ8CJZtK', age=-564106861, birthday=Wed Feb 27 22:14:34 CST 2019, str
 [DataFactory-01-注解支持](doc/blog/DataFactory-01-注解支持.md)
 
 [DataFactory-02-正则表达式支持](doc/blog/DataFactory-02-正则表达式支持.md)
+
+# Road-MAP
+
+- [ ] 支持列表+数组+集合
+
+- [ ] 支持多维数组
+
+- [ ] 支持全局配置
+
+- [ ] 支持用户自定义策略
