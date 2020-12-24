@@ -1,5 +1,6 @@
 package com.github.houbb.data.factory.core.api.data.aggregate;
 
+import com.github.houbb.data.factory.api.annotation.DataFactory;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
@@ -26,6 +27,7 @@ import java.util.Map;
 public class BeanData<T> implements IData<T> {
 
     @Override
+    @SuppressWarnings("all")
     public T build(IContext context, Class<T> tClass) {
         try {
             List<Field> fieldList = ClassUtil.getAllFieldList(tClass);
@@ -37,7 +39,15 @@ public class BeanData<T> implements IData<T> {
                 }
                 // 初始化上下文
                 buildContext(context, field);
-                Object value = DataFactoryAnnotationData.getInstance().build(context, tClass);
+                
+                // 是否为对应的信息
+                Object value = null;
+                DataFactory dataFactory = field.getAnnotation(DataFactory.class);
+                if(dataFactory != null && dataFactory.data() != IData.class) {
+                    value = ClassUtil.newInstance(dataFactory.data()).build(context, tClass);
+                } else {
+                    value = DataFactoryAnnotationData.getInstance().build(context, tClass);
+                }
                 field.set(instance, value);
             }
             return instance;

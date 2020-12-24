@@ -14,6 +14,16 @@ import org.junit.jupiter.api.Test;
 public class DataUtilBaseTest {
 
     /**
+     *
+     * Method: build(clazz)
+     */
+    @Test
+    public void buildStringTest() throws Exception {
+        String s1 = DataUtil.build(String.class);
+        System.out.println(s1);
+    }
+
+    /**
     *
     * Method: build(clazz)
     */

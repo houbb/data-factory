@@ -1,5 +1,7 @@
 package com.github.houbb.data.factory.api.annotation;
 
+import com.github.houbb.data.factory.api.core.IData;
+
 import java.lang.annotation.*;
 
 /**
@@ -69,5 +71,12 @@ public @interface DataFactory {
      * @return 表达式信息
      */
     String regex() default "";
+
+    /**
+     * 指定当前字段的类实现策略
+     * @return 实现类
+     * @since 0.0.6
+     */
+    Class<? extends IData> data() default IData.class;
 
 }
