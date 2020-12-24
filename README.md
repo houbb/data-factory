@@ -98,4 +98,8 @@ User{name='wZ8CJZtK', age=-564106861, birthday=Wed Feb 27 22:14:34 CST 2019, str
 
 - [ ] 支持全局配置
 
-- [ ] 支持用户自定义策略
+# 他山之石
+
+[jmockdata](https://github.com/jsonzou/jmockdata)
+
+[podam](https://github.com/mtedone/podam)

@@ -1,6 +1,5 @@
 package com.github.houbb.data.factory.core.api.data.math;
 
-import com.github.houbb.data.factory.api.annotation.DataFactory;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.api.data.annotation.AbstractNumberData;
