@@ -5,7 +5,7 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>data-factory</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.8</version>
+    <version>0.0.9-SNAPSHOT</version>
     <modules>
         <module>data-factory-api</module>
         <module>data-factory-core</module>
