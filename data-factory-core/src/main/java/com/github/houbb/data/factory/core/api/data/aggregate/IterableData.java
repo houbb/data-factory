@@ -4,6 +4,7 @@ import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
 import com.github.houbb.data.factory.core.util.DataUtil;
+import com.github.houbb.data.factory.core.util.InnerDataUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
@@ -24,6 +25,7 @@ import java.util.Set;
 public class IterableData<T> implements IData<Iterable<T>> {
 
     @Override
+    @SuppressWarnings("all")
     public Iterable<T> build(IContext context, Class<Iterable<T>> iterableClass) {
         // 直接存放线性表
         Iterable<T> result = newInstance(iterableClass);
@@ -33,10 +35,13 @@ public class IterableData<T> implements IData<Iterable<T>> {
 
         // 获取元素类型
         final Class<T> itemClass = context.getGenericList().get(0);
-        final T object = DataUtil.build(context, itemClass);
-
         // 新增元素
-        ((Collection<T>) result).add(object);
+        final int size = InnerDataUtil.randomSize();
+        Collection<T> collection = (Collection<T>) result;
+        for(int i = 0; i < size; i++) {
+            final T object = DataUtil.build(context, itemClass);
+            collection.add(object);
+        }
 
         return result;
     }

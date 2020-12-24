@@ -17,7 +17,7 @@ public class DoubleArrayData implements IData<double[]> {
 
     @Override
     public double[] build(IContext context, Class<double[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         double[] array = new double[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(double.class);

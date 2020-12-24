@@ -3,6 +3,7 @@ package com.github.houbb.data.factory.core.api.data.aggregate;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.util.DataUtil;
+import com.github.houbb.data.factory.core.util.InnerDataUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
@@ -19,18 +20,22 @@ import java.util.Map;
 public class MapData implements IData<Map> {
 
     @Override
+    @SuppressWarnings("all")
     public Map build(IContext context, Class<Map> mapClass) {
-        Map map = new HashMap(1);
+        final int size = InnerDataUtil.randomSize();
+        Map map = new HashMap(size);
 
         List<Class> genericTypeList = context.getGenericList();
         if(CollectionUtil.isEmpty(genericTypeList)) {
             return map;
         }
 
+        for(int i = 0; i < size; i++) {
+            final Object key = DataUtil.build(context, genericTypeList.get(0));
+            final Object value = DataUtil.build(context, genericTypeList.get(1));
+            map.put(key, value);
+        }
 
-        final Object key = DataUtil.build(context, genericTypeList.get(0));
-        final Object value = DataUtil.build(context, genericTypeList.get(1));
-        map.put(key, value);
         return map;
     }
 

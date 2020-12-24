@@ -17,7 +17,7 @@ public class ShortArrayData implements IData<short[]> {
 
     @Override
     public short[] build(IContext context, Class<short[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         short[] array = new short[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(short.class);

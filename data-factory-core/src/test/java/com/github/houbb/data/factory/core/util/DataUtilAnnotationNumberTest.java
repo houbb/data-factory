@@ -23,6 +23,7 @@ public class DataUtilAnnotationNumberTest {
     @Test
     public void stringAnnotationTest() throws Exception {
         UserAnnotationNumber number = DataUtil.build(UserAnnotationNumber.class);
+        System.out.println(number);
 
         Assertions.assertTrue(number.getaByte() >= 10);
         Assertions.assertTrue(number.getaByte() <= 20);

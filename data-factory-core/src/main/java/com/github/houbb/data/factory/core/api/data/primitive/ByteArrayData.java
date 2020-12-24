@@ -17,7 +17,7 @@ public class ByteArrayData implements IData<byte[]> {
 
     @Override
     public byte[] build(IContext context, Class<byte[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         byte[] array = new byte[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(byte.class);

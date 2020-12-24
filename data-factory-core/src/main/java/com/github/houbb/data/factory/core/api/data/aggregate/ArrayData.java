@@ -3,6 +3,7 @@ package com.github.houbb.data.factory.core.api.data.aggregate;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
 import com.github.houbb.data.factory.core.util.DataUtil;
+import com.github.houbb.data.factory.core.util.InnerDataUtil;
 
 import java.lang.reflect.Array;
 
@@ -15,11 +16,17 @@ import java.lang.reflect.Array;
 public class ArrayData<T> implements IData<T[]> {
 
     @Override
+    @SuppressWarnings("all")
     public T[] build(IContext context, Class<T[]> aClass) {
         final Class<T> itemClass = (Class<T>) aClass.getComponentType();
-        T[] arrays = (T[]) Array.newInstance(itemClass, 1);
+        final int size = InnerDataUtil.randomSize();
+        T[] arrays = (T[]) Array.newInstance(itemClass, size);
         T item = DataUtil.build(itemClass);
-        Array.set(arrays, 0, item);
+
+        for(int i = 0; i < size; i++) {
+            Array.set(arrays, i, item);
+        }
+
         return arrays;
     }
 

@@ -17,7 +17,7 @@ public class IntegerArrayData implements IData<int[]> {
 
     @Override
     public int[] build(IContext context, Class<int[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         int[] array = new int[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(int.class);

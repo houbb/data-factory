@@ -19,7 +19,7 @@ public class BoolArrayData implements IData<boolean[]> {
 
     @Override
     public boolean[] build(IContext context, Class<boolean[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         boolean[] array = new boolean[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(boolean.class);

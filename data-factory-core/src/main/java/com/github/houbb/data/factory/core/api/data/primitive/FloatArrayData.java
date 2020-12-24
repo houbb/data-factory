@@ -17,7 +17,7 @@ public class FloatArrayData implements IData<float[]> {
 
     @Override
     public float[] build(IContext context, Class<float[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         float[] array = new float[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(float.class);

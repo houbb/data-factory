@@ -28,4 +28,13 @@ public final class InnerDataUtil {
         return random.nextInt(min, max);
     }
 
+    /**
+     * 随机的大小
+     * @return 大小
+     * @since 0.0.8
+     */
+    public static int randomSize() {
+        return randomSize(1, 10);
+    }
+
 }

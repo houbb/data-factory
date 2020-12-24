@@ -62,6 +62,13 @@ public @interface DataFactory {
      */
     int minLen() default 1;
 
+    /**
+     * 指定当前字段的类实现策略
+     * @return 实现类
+     * @since 0.0.6
+     */
+    Class<? extends IData> data() default IData.class;
+
 }
 ```
 
@@ -205,3 +212,39 @@ public void stringAnnotationTest() throws Exception {
 10.452
 15.577
 ```
+
+## 自定义 Data 生成策略
+
+### 自定义生成策略
+
+```java
+public class MyStringData implements IData<String>  {
+
+    @Override
+    public String build(IContext context, Class<String> stringClass) {
+        return "123";
+    }
+
+}
+```
+
+### 使用
+
+```java
+public class UserAnnotationData {
+
+    @DataFactory(data = MyStringData.class)
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+}
+```
+
+这样生成的就是我们自己的数据生成策略。

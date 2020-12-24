@@ -101,4 +101,17 @@ public class UserAnnotationNumber {
         this.bigInteger = bigInteger;
     }
 
+    @Override
+    public String toString() {
+        return "UserAnnotationNumber{" +
+                "aByte=" + aByte +
+                ", aShort=" + aShort +
+                ", integer=" + integer +
+                ", aLong=" + aLong +
+                ", aDouble=" + aDouble +
+                ", aFloat=" + aFloat +
+                ", bigDecimal=" + bigDecimal +
+                ", bigInteger=" + bigInteger +
+                '}';
+    }
 }

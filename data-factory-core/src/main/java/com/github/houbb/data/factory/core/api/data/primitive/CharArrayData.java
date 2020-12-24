@@ -17,7 +17,7 @@ public class CharArrayData implements IData<char[]> {
 
     @Override
     public char[] build(IContext context, Class<char[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         char[] array = new char[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(char.class);

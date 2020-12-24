@@ -17,7 +17,7 @@ public class LongArrayData implements IData<long[]> {
 
     @Override
     public long[] build(IContext context, Class<long[]> aClass) {
-        int size = InnerDataUtil.randomSize(1, 10);
+        int size = InnerDataUtil.randomSize();
         long[] array = new long[size];
         for(int i = 0; i < size; i++) {
             array[i] = DataUtil.build(long.class);
