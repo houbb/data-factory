@@ -41,6 +41,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class DataFactory {
 
+    private DataFactory(){}
+
     /**
      * 存放数据实现的 map
      */
@@ -65,6 +67,14 @@ public final class DataFactory {
         DATA_CLASS_MAP.put(Year.class, new YearData());
         DATA_CLASS_MAP.put(Currency.class, new CurrencyData());
         DATA_CLASS_MAP.put(Date.class, new DateData());
+        DATA_CLASS_MAP.put(int[].class, new IntegerArrayData());
+        DATA_CLASS_MAP.put(short[].class, new ShortArrayData());
+        DATA_CLASS_MAP.put(long[].class, new LongArrayData());
+        DATA_CLASS_MAP.put(byte[].class, new ByteArrayData());
+        DATA_CLASS_MAP.put(char[].class, new CharArrayData());
+        DATA_CLASS_MAP.put(double[].class, new DoubleArrayData());
+        DATA_CLASS_MAP.put(float[].class, new FloatArrayData());
+        DATA_CLASS_MAP.put(boolean[].class, new BoolArrayData());
     }
 
     /**
@@ -105,6 +115,7 @@ public final class DataFactory {
      * @param clazz 字段类型
      * @return 结果
      */
+    @SuppressWarnings("all")
     public static IData getData(final Class clazz) {
         // 快速返回
         if(ObjectUtil.isNull(clazz)) {
@@ -113,7 +124,13 @@ public final class DataFactory {
 
         // 数组/map/集合/bean对象
         if(clazz.isArray()) {
-            return new ArrayData();
+            final IData data = DATA_CLASS_MAP.get(clazz);
+            if(ObjectUtil.isNull(data)) {
+                return new ArrayData();
+            }
+
+            // 对应的基本类型数组
+            return data;
         }
         if(ClassTypeUtil.isIterable(clazz)) {
             return new IterableData();
