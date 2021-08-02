@@ -1,6 +1,8 @@
 package com.github.houbb.data.factory.api.annotation;
 
+import com.github.houbb.data.factory.api.annotation.meta.DataMeta;
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.api.core.meta.IAnnotationData;
 
 import java.lang.annotation.*;
 
@@ -14,6 +16,7 @@ import java.lang.annotation.*;
 @Documented
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
+@DataMeta(value = IAnnotationData.class)
 public @interface DataFactory {
 
     /**

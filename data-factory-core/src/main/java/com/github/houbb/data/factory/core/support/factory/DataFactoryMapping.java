@@ -1,12 +1,7 @@
 package com.github.houbb.data.factory.core.support.factory;
 
 import com.github.houbb.data.factory.api.core.IData;
-import com.github.houbb.data.factory.core.api.data.aggregate.ArrayData;
-import com.github.houbb.data.factory.core.api.data.aggregate.BeanData;
-import com.github.houbb.data.factory.core.api.data.aggregate.EnumData;
-import com.github.houbb.data.factory.core.api.data.aggregate.IterableData;
-import com.github.houbb.data.factory.core.api.data.aggregate.MapData;
-import com.github.houbb.data.factory.core.api.data.aggregate.NullData;
+import com.github.houbb.data.factory.core.api.data.aggregate.*;
 import com.github.houbb.data.factory.core.api.data.lang.StringData;
 import com.github.houbb.data.factory.core.api.data.math.BigDecimalData;
 import com.github.houbb.data.factory.core.api.data.math.BigIntegerData;
@@ -21,7 +16,6 @@ import com.github.houbb.data.factory.core.util.DataClassUtil;
 import com.github.houbb.data.factory.core.util.DataPrimitiveUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
-import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.math.BigDecimal;
@@ -31,7 +25,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Year;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 数据工厂
@@ -39,9 +32,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * date 2019/2/26
  * @since 0.0.1
  */
-public final class DataFactory {
+public final class DataFactoryMapping {
 
-    private DataFactory(){}
+    private DataFactoryMapping(){}
 
     /**
      * 存放数据实现的 map

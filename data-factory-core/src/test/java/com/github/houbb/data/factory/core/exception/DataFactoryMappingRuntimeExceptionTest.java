@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 * @author binbin.hou
 * @version 0.0.1-SNAPSHOT
 */
-public class DataFactoryRuntimeExceptionTest {
+public class DataFactoryMappingRuntimeExceptionTest {
 
     /**
     *

@@ -3,9 +3,11 @@ package com.github.houbb.data.factory.core.api.data.aggregate;
 import com.github.houbb.data.factory.api.annotation.DataFactory;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IData;
+import com.github.houbb.data.factory.api.core.meta.IAnnotationData;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
-import com.github.houbb.data.factory.core.api.data.annotation.DataFactoryAnnotationData;
+import com.github.houbb.data.factory.core.api.data.annotation.DefaultDataFactoryAnnotationData;
 import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
+import com.github.houbb.data.factory.core.util.InnerDataUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 
@@ -39,15 +41,28 @@ public class BeanData<T> implements IData<T> {
                 }
                 // 初始化上下文
                 buildContext(context, field);
+
+                // 字段的类型
+                Class<?> fieldClass = field.getType();
                 
                 // 是否为对应的信息
                 Object value = null;
                 DataFactory dataFactory = field.getAnnotation(DataFactory.class);
                 if(dataFactory != null && dataFactory.data() != IData.class) {
-                    value = ClassUtil.newInstance(dataFactory.data()).build(context, tClass);
-                } else {
-                    value = DataFactoryAnnotationData.getInstance().build(context, tClass);
+                    value = ClassUtil.newInstance(dataFactory.data()).build(context, fieldClass);
+                } else if(dataFactory != null) {
+                    // 默认的实现
+                    DefaultDataFactoryAnnotationData annotationData = new DefaultDataFactoryAnnotationData();
+                    value = annotationData.build(context, fieldClass);
                 }
+
+                // 是否为自定义注解
+                IAnnotationData annotationData = InnerDataUtil.getDefineDataAnnotation(field);
+                if(annotationData != null) {
+                    value = annotationData.build(context, fieldClass);
+                }
+
+                // 设置对应的值
                 field.set(instance, value);
             }
             return instance;
@@ -62,6 +77,7 @@ public class BeanData<T> implements IData<T> {
      * @param field 字段信息
      * @return 执行的上下问
      */
+    @SuppressWarnings("all")
     private IContext buildContext(IContext context, Field field) {
         final Class fieldType = field.getType();
         Type type = field.getGenericType();

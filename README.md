@@ -38,7 +38,7 @@ Maven 3.0+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>data-factory-core</artifactId>
-    <version>0.0.8</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -140,14 +140,10 @@ UserAnnotationNumber{aByte=10, aShort=17, integer=19, aLong=11, aDouble=19.888, 
 
 [DataFactory-02-正则表达式支持](doc/blog/DataFactory-02-正则表达式支持.md)
 
+[DataFactory-03-自定义注解](doc/blog/DataFactory-03-自定义注解.md)
+
 # Road-MAP
 
 - [ ] 支持多维数组
 
 - [ ] 支持全局配置
-
-# 他山之石
-
-[jmockdata](https://github.com/jsonzou/jmockdata)
-
-[podam](https://github.com/mtedone/podam)

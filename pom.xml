@@ -5,7 +5,7 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>data-factory</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>data-factory-api</module>
         <module>data-factory-core</module>
@@ -31,7 +31,7 @@
         <project.compiler.level>1.7</project.compiler.level>
 
         <!--============================== INTER ==============================-->
-        <heaven.version>0.1.118</heaven.version>
+        <heaven.version>0.1.141</heaven.version>
         <plugin.gen.version>1.0.6</plugin.gen.version>
 
         <!--============================== OTHER ==============================-->
