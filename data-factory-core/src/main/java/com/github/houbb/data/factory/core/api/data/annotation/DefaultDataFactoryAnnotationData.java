@@ -3,6 +3,7 @@ package com.github.houbb.data.factory.core.api.data.annotation;
 import com.github.houbb.data.factory.api.annotation.DataFactory;
 import com.github.houbb.data.factory.api.core.IContext;
 import com.github.houbb.data.factory.api.core.IRegexGen;
+import com.github.houbb.data.factory.api.core.meta.IAnnotationData;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
 import com.github.houbb.data.factory.core.api.regex.DefaultRegexGen;
 import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
@@ -19,6 +20,16 @@ import java.lang.reflect.InvocationTargetException;
  * @since 1.0.0
  */
 public class DefaultDataFactoryAnnotationData extends AbstractAnnotationData<DataFactory> {
+
+    /**
+     * 新建对象实例
+     *
+     * @return 实现
+     * @since 1.1.0
+     */
+    public static IAnnotationData newInstance() {
+        return new DefaultDataFactoryAnnotationData();
+    }
 
     @Override
     protected Object buildDataValue(DataFactory dataFactory, IContext context,
