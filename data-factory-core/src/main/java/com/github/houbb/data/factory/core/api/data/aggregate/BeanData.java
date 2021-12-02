@@ -7,6 +7,7 @@ import com.github.houbb.data.factory.api.core.meta.IAnnotationData;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
 import com.github.houbb.data.factory.core.api.data.annotation.DefaultDataFactoryAnnotationData;
 import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
+import com.github.houbb.data.factory.core.util.DataUtil;
 import com.github.houbb.data.factory.core.util.InnerDataUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
@@ -43,37 +44,53 @@ public class BeanData<T> implements IData<T> {
                 buildContext(context, field);
 
                 // 字段的类型
-                Class<?> fieldClass = field.getType();
-
-                // 是否为对应的信息
-                Object value = null;
-                DataFactory dataFactory = field.getAnnotation(DataFactory.class);
-                if(dataFactory != null && dataFactory.data() != IData.class) {
-                    value = ClassUtil.newInstance(dataFactory.data()).build(context, fieldClass);
-                } else if(dataFactory != null) {
-                    // 默认的实现
-                    DefaultDataFactoryAnnotationData annotationData = new DefaultDataFactoryAnnotationData();
-                    annotationData.setAnnotation(dataFactory);
-                    value = annotationData.build(context, fieldClass);
-                }
-
-                // 是否为自定义注解
-                IAnnotationData annotationData = InnerDataUtil.getDefineDataAnnotation(field);
-                if(annotationData != null) {
-                    value = annotationData.build(context, fieldClass);
-                }
+                Object value = getFieldDataValue(field, context);
 
                 // 设置对应的值
-                if(value == null) {
-                    continue;
-                }
-
                 field.set(instance, value);
             }
             return instance;
         } catch (IllegalAccessException e) {
             throw new DataFactoryRuntimeException(e);
         }
+    }
+
+    /**
+     * 获取字段对应的数据值
+     * @param field 字段
+     * @return 结果
+     * @since 1.1.0
+     */
+    @SuppressWarnings("all")
+    private Object getFieldDataValue(final Field field,
+                                     final IContext context) {
+        // 字段的类型
+        Class<?> fieldClass = field.getType();
+
+        // 是否为自定义注解
+        IAnnotationData annotationData = InnerDataUtil.getDefineDataAnnotation(field);
+
+        // 是否为对应的信息
+        Object value = null;
+        DataFactory dataFactory = field.getAnnotation(DataFactory.class);
+        if(dataFactory != null) {
+            // 用户自定义的实现方式
+            if(dataFactory.data() != IData.class) {
+                value = ClassUtil.newInstance(dataFactory.data()).build(context, fieldClass);
+            } else {
+                // 默认的实现
+                value = DefaultDataFactoryAnnotationData.newInstance()
+                        .build(context, fieldClass);
+            }
+        } else if(annotationData != null) {
+            // 用户自定义注解
+            value = annotationData.build(context, fieldClass);
+        } else {
+            // 没有任何注解的时候
+            value = DataUtil.build(context, fieldClass);
+        }
+
+        return value;
     }
 
     /**
