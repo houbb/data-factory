@@ -6,6 +6,7 @@ import com.github.houbb.data.factory.api.core.IRegexGen;
 import com.github.houbb.data.factory.core.api.context.DefaultDataContext;
 import com.github.houbb.data.factory.core.api.regex.DefaultRegexGen;
 import com.github.houbb.data.factory.core.exception.DataFactoryRuntimeException;
+import com.github.houbb.data.factory.core.support.factory.DataFactoryMapping;
 import com.github.houbb.data.factory.core.util.DataPrimitiveUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
@@ -21,10 +22,11 @@ import java.lang.reflect.InvocationTargetException;
 public class DefaultDataFactoryAnnotationData extends AbstractAnnotationData<DataFactory> {
 
     @Override
-    protected Object buildDataValue(DataFactory dataFactory, IContext context,
+    protected Object buildDataValue(DataFactory dataFactory,
+                                    IContext context,
                                Class<?> tClass) {
         // 忽略字段，直接返回 null
-        if (dataFactory.ignore()) {
+        if (dataFactory == null || dataFactory.ignore()) {
             return null;
         }
 
@@ -48,7 +50,7 @@ public class DefaultDataFactoryAnnotationData extends AbstractAnnotationData<Dat
             defaultDataContext.setDataFactory(dataFactory);
         }
 
-        return null;
+        return DataFactoryMapping.getData(fieldType).build(context, fieldType);
     }
 
     /**

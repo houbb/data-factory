@@ -54,4 +54,12 @@ public abstract class AbstractAnnotationData<A extends Annotation> implements IA
         return buildDataValue(this.annotation, context, tClass);
     }
 
+    /**
+     * 设置注解
+     * @param annotation 注解
+     * @since 1.1.0
+     */
+    public void setAnnotation(A annotation) {
+        this.annotation = annotation;
+    }
 }

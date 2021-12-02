@@ -44,7 +44,7 @@ public class BeanData<T> implements IData<T> {
 
                 // 字段的类型
                 Class<?> fieldClass = field.getType();
-                
+
                 // 是否为对应的信息
                 Object value = null;
                 DataFactory dataFactory = field.getAnnotation(DataFactory.class);
@@ -53,6 +53,7 @@ public class BeanData<T> implements IData<T> {
                 } else if(dataFactory != null) {
                     // 默认的实现
                     DefaultDataFactoryAnnotationData annotationData = new DefaultDataFactoryAnnotationData();
+                    annotationData.setAnnotation(dataFactory);
                     value = annotationData.build(context, fieldClass);
                 }
 
@@ -63,6 +64,10 @@ public class BeanData<T> implements IData<T> {
                 }
 
                 // 设置对应的值
+                if(value == null) {
+                    continue;
+                }
+
                 field.set(instance, value);
             }
             return instance;
