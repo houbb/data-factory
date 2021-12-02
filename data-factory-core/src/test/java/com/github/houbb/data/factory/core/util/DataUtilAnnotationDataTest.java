@@ -1,7 +1,7 @@
 package com.github.houbb.data.factory.core.util;
 
 import com.github.houbb.data.factory.core.model.annotation.UserAnnotationData;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> DataUtil Tester. </p>

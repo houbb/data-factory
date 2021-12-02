@@ -7,8 +7,8 @@ package com.github.houbb.data.factory.core.util.base;
 
 import com.github.houbb.data.factory.core.util.DataUtil;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

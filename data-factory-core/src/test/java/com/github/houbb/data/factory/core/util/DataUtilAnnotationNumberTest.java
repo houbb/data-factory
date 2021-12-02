@@ -1,9 +1,8 @@
 package com.github.houbb.data.factory.core.util;
 
 import com.github.houbb.data.factory.core.model.annotation.UserAnnotationNumber;
-import com.github.houbb.data.factory.core.model.annotation.UserAnnotationString;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,29 +24,29 @@ public class DataUtilAnnotationNumberTest {
         UserAnnotationNumber number = DataUtil.build(UserAnnotationNumber.class);
         System.out.println(number);
 
-        Assertions.assertTrue(number.getaByte() >= 10);
-        Assertions.assertTrue(number.getaByte() <= 20);
+        Assert.assertTrue(number.getaByte() >= 10);
+        Assert.assertTrue(number.getaByte() <= 20);
 
-        Assertions.assertTrue(number.getaShort() >= 10);
-        Assertions.assertTrue(number.getaShort() <= 20);
+        Assert.assertTrue(number.getaShort() >= 10);
+        Assert.assertTrue(number.getaShort() <= 20);
 
-        Assertions.assertTrue(number.getInteger() >= 10);
-        Assertions.assertTrue(number.getInteger() <= 20);
+        Assert.assertTrue(number.getInteger() >= 10);
+        Assert.assertTrue(number.getInteger() <= 20);
 
-        Assertions.assertTrue(number.getaLong() >= 10);
-        Assertions.assertTrue(number.getaLong() <= 20);
+        Assert.assertTrue(number.getaLong() >= 10);
+        Assert.assertTrue(number.getaLong() <= 20);
 
-        Assertions.assertTrue(number.getaFloat() >= 10);
-        Assertions.assertTrue(number.getaFloat() <= 21);
+        Assert.assertTrue(number.getaFloat() >= 10);
+        Assert.assertTrue(number.getaFloat() <= 21);
 
-        Assertions.assertTrue(number.getaDouble() >= 10);
-        Assertions.assertTrue(number.getaDouble() <= 21);
+        Assert.assertTrue(number.getaDouble() >= 10);
+        Assert.assertTrue(number.getaDouble() <= 21);
 
-        Assertions.assertTrue(number.getBigInteger().compareTo(new BigInteger("10")) >= 0);
-        Assertions.assertTrue(number.getBigInteger().compareTo(new BigInteger("20")) <= 0);
+        Assert.assertTrue(number.getBigInteger().compareTo(new BigInteger("10")) >= 0);
+        Assert.assertTrue(number.getBigInteger().compareTo(new BigInteger("20")) <= 0);
 
-        Assertions.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("10")) >= 0);
-        Assertions.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("21")) <= 0);
+        Assert.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("10")) >= 0);
+        Assert.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("21")) <= 0);
 
         System.out.println(number.getaFloat());
         System.out.println(number.getaDouble());

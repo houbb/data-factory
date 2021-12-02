@@ -1,8 +1,9 @@
 package com.github.houbb.data.factory.core.util.base;
 
 import com.github.houbb.data.factory.core.util.DataUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
+import org.junit.Assert;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,7 +26,7 @@ public class DataUtilMathTest {
     @Test
     public void buildBigDecimalTest() throws Exception {
         BigDecimal result = DataUtil.build(BigDecimal.class);
-        Assertions.assertNotNull(result);
+        Assert.assertNotNull(result);
         System.out.println(result);
     }
 
@@ -36,7 +37,7 @@ public class DataUtilMathTest {
     @Test
     public void buildBigIntegerTest() throws Exception {
         BigInteger result = DataUtil.build(BigInteger.class);
-        Assertions.assertNotNull(result);
+        Assert.assertNotNull(result);
         System.out.println(result);
     }
 

@@ -28,7 +28,7 @@ public class DefaultDataFactoryAnnotationData extends AbstractAnnotationData<Dat
      * @return 实现
      * @since 1.1.0
      */
-    public static IAnnotationData newInstance() {
+    public static DefaultDataFactoryAnnotationData newInstance() {
         return new DefaultDataFactoryAnnotationData();
     }
 

@@ -28,16 +28,16 @@
 
         <!--============================== MAIN ==============================-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.compiler.level>1.7</project.compiler.level>
+        <project.compiler.level>1.8</project.compiler.level>
 
         <!--============================== INTER ==============================-->
         <heaven.version>0.1.148</heaven.version>
+        <test.version>0.0.1</test.version>
         <plugin.gen.version>1.0.6</plugin.gen.version>
 
         <!--============================== OTHER ==============================-->
-        <junit5.version>5.2.0</junit5.version>
         <apiguardian-api.version>1.0.0</apiguardian-api.version>
-        <auto-service.version>1.0-rc4</auto-service.version>
+        <auto-service.version>1.0-rc6</auto-service.version>
         <generex.version>1.0.2</generex.version>
     </properties>
 
@@ -65,23 +65,14 @@
                 <artifactId>heaven</artifactId>
                 <version>${heaven.version}</version>
             </dependency>
-
-
-            <!--============================== OTHER ==============================-->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit5.version}</version>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>test-core</artifactId>
+                <version>${test.version}</version>
                 <scope>test</scope>
                 <optional>true</optional>
             </dependency>
 
-            <dependency>
-                <groupId>org.apiguardian</groupId>
-                <artifactId>apiguardian-api</artifactId>
-                <version>${apiguardian-api.version}</version>
-                <optional>true</optional>
-            </dependency>
 
             <dependency>
                 <groupId>com.google.auto.service</groupId>
@@ -100,19 +91,6 @@
 
 
     <dependencies>
-        <!--============================== INTER ==============================-->
-
-        <!--============================== OTHER ==============================-->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apiguardian</groupId>
-            <artifactId>apiguardian-api</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>

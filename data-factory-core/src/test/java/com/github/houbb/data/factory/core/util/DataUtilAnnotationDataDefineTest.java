@@ -2,7 +2,7 @@ package com.github.houbb.data.factory.core.util;
 
 import com.github.houbb.data.factory.core.model.annotation.UserAnnotationData;
 import com.github.houbb.data.factory.core.model.annotation.UserDefineAnnotationData;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> 自定义注解 </p>

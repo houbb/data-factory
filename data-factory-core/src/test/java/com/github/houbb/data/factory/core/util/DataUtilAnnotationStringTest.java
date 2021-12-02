@@ -1,8 +1,9 @@
 package com.github.houbb.data.factory.core.util;
 
 import com.github.houbb.data.factory.core.model.annotation.UserAnnotationString;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
+import org.junit.Assert;
 
 /**
 * <p> DataUtil Tester. </p>
@@ -22,9 +23,9 @@ public class DataUtilAnnotationStringTest {
         for(int i = 0; i < 100; i++) {
             UserAnnotationString userAnnotationString = DataUtil.build(UserAnnotationString.class);
 
-            Assertions.assertNull(userAnnotationString.getHobby());
-            Assertions.assertTrue(userAnnotationString.getName().length() >= 2);
-            Assertions.assertTrue(userAnnotationString.getName().length() <= 10);
+            Assert.assertNull(userAnnotationString.getHobby());
+            Assert.assertTrue(userAnnotationString.getName().length() >= 2);
+            Assert.assertTrue(userAnnotationString.getName().length() <= 10);
         }
     }
 

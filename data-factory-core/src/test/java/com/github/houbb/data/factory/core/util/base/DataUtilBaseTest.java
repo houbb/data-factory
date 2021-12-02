@@ -1,8 +1,9 @@
 package com.github.houbb.data.factory.core.util.base;
 
 import com.github.houbb.data.factory.core.util.DataUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
 * <p> DataUtil Tester. </p>
@@ -127,7 +128,7 @@ public class DataUtilBaseTest {
     public void buildVoidTest() throws Exception {
         Void resultOne = DataUtil.build(Void.class);
         Void resultTwo = DataUtil.build(void.class);
-        Assertions.assertNull(resultOne);
-        Assertions.assertNull(resultTwo);
+        Assert.assertNull(resultOne);
+        Assert.assertNull(resultTwo);
     }
 }

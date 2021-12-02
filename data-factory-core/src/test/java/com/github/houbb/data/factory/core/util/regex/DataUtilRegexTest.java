@@ -4,7 +4,7 @@ import com.github.houbb.data.factory.api.core.IRegexGen;
 import com.github.houbb.data.factory.core.api.regex.DefaultRegexGen;
 import com.github.houbb.data.factory.core.model.regex.RegexBean;
 import com.github.houbb.data.factory.core.util.DataUtil;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * Regex 正则测试

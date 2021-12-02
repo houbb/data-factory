@@ -1,7 +1,7 @@
 package com.github.houbb.data.factory.core.util.collection;
 
 import com.github.houbb.data.factory.core.util.DataUtil;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;

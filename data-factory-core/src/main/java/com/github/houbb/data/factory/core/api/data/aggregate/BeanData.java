@@ -80,6 +80,7 @@ public class BeanData<T> implements IData<T> {
             } else {
                 // 默认的实现
                 value = DefaultDataFactoryAnnotationData.newInstance()
+                        .setAnnotation(dataFactory)
                         .build(context, fieldClass);
             }
         } else if(annotationData != null) {

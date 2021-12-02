@@ -1,8 +1,9 @@
 package com.github.houbb.data.factory.core.util.base;
 
 import com.github.houbb.data.factory.core.util.DataUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
 * <p> DataUtil Tester. </p>
@@ -20,7 +21,7 @@ public class DataUtilPatternTest {
     @Test
     public void buildNullTest() throws Exception {
         Object result = DataUtil.build(null);
-        Assertions.assertNull(result);
+        Assert.assertNull(result);
     }
 
 }

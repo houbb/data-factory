@@ -28,8 +28,13 @@
             <groupId>com.github.houbb</groupId>
             <artifactId>heaven</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>test-core</artifactId>
+        </dependency>
 
         <!--============================== OTHER ==============================-->
+
         <dependency>
             <groupId>com.google.auto.service</groupId>
             <artifactId>auto-service</artifactId>

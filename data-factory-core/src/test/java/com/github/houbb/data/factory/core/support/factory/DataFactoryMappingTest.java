@@ -1,6 +1,6 @@
 package com.github.houbb.data.factory.core.support.factory;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> DataFactory Tester. </p>

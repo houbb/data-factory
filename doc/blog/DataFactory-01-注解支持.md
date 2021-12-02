@@ -116,9 +116,9 @@ public void stringAnnotationTest() throws Exception {
     for(int i = 0; i < 100; i++) {
         UserAnnotationString userAnnotationString = DataUtil.build(UserAnnotationString.class);
 
-        Assertions.assertNull(userAnnotationString.getHobby());
-        Assertions.assertTrue(userAnnotationString.getName().length() >= 2);
-        Assertions.assertTrue(userAnnotationString.getName().length() <= 10);
+        Assert.assertNull(userAnnotationString.getHobby());
+        Assert.assertTrue(userAnnotationString.getName().length() >= 2);
+        Assert.assertTrue(userAnnotationString.getName().length() <= 10);
     }
 }
 ```
@@ -175,29 +175,29 @@ public class UserAnnotationNumber {
 public void stringAnnotationTest() throws Exception {
     UserAnnotationNumber number = DataUtil.build(UserAnnotationNumber.class);
 
-    Assertions.assertTrue(number.getaByte() >= 10);
-    Assertions.assertTrue(number.getaByte() <= 20);
+    Assert.assertTrue(number.getaByte() >= 10);
+    Assert.assertTrue(number.getaByte() <= 20);
 
-    Assertions.assertTrue(number.getaShort() >= 10);
-    Assertions.assertTrue(number.getaShort() <= 20);
+    Assert.assertTrue(number.getaShort() >= 10);
+    Assert.assertTrue(number.getaShort() <= 20);
 
-    Assertions.assertTrue(number.getInteger() >= 10);
-    Assertions.assertTrue(number.getInteger() <= 20);
+    Assert.assertTrue(number.getInteger() >= 10);
+    Assert.assertTrue(number.getInteger() <= 20);
 
-    Assertions.assertTrue(number.getaLong() >= 10);
-    Assertions.assertTrue(number.getaLong() <= 20);
+    Assert.assertTrue(number.getaLong() >= 10);
+    Assert.assertTrue(number.getaLong() <= 20);
 
-    Assertions.assertTrue(number.getaFloat() >= 10);
-    Assertions.assertTrue(number.getaFloat() <= 21);
+    Assert.assertTrue(number.getaFloat() >= 10);
+    Assert.assertTrue(number.getaFloat() <= 21);
 
-    Assertions.assertTrue(number.getaDouble() >= 10);
-    Assertions.assertTrue(number.getaDouble() <= 21);
+    Assert.assertTrue(number.getaDouble() >= 10);
+    Assert.assertTrue(number.getaDouble() <= 21);
 
-    Assertions.assertTrue(number.getBigInteger().compareTo(new BigInteger("10")) >= 0);
-    Assertions.assertTrue(number.getBigInteger().compareTo(new BigInteger("20")) <= 0);
+    Assert.assertTrue(number.getBigInteger().compareTo(new BigInteger("10")) >= 0);
+    Assert.assertTrue(number.getBigInteger().compareTo(new BigInteger("20")) <= 0);
 
-    Assertions.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("10")) >= 0);
-    Assertions.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("21")) <= 0);
+    Assert.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("10")) >= 0);
+    Assert.assertTrue(number.getBigDecimal().compareTo(new BigDecimal("21")) <= 0);
 
     System.out.println(number.getaFloat());
     System.out.println(number.getaDouble());

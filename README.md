@@ -50,7 +50,7 @@ Maven 3.0+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>data-factory-core</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
