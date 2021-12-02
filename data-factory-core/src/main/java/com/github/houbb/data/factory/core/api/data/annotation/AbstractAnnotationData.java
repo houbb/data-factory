@@ -58,6 +58,7 @@ public abstract class AbstractAnnotationData<A extends Annotation> implements IA
      * 设置注解
      * @param annotation 注解
      * @since 1.1.0
+     * @return this
      */
     public AbstractAnnotationData setAnnotation(A annotation) {
         this.annotation = annotation;
