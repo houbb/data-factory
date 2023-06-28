@@ -54,6 +54,12 @@ Maven 3.0+
 </dependency>
 ```
 
+对应的 gradle 引入
+
+```
+implementation 'com.github.houbb:data-factory-core:1.2.0'
+```
+
 ## 基本类型
 
 我们通过 `DataUtil.build(class)` 就可以生成对应类的随机值。
